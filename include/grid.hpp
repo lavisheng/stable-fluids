@@ -1,3 +1,5 @@
+#ifndef GRID_
+#define GRID_
 #include <array>
 #include <EigenTypes.h>
 #include <Eigen/Dense>
@@ -20,3 +22,5 @@ typedef struct Velocity_{
 } Velocity;
 
 typedef GRID Pressure;
+
+#endif

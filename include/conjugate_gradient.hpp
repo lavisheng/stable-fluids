@@ -1,4 +1,5 @@
+#include "grid.hpp"
 #include <Eigen/Sparse>
 #include <Eigen/Dense>
 
-void conjugate_gradient(Eigen::VectorXd &x, Eigen::SparseMatrixXd A, Eigen::VectorXd b);
+void conjugate_gradient(Eigen::VectorXd &x, Eigen::SparseMatrixd A, Eigen::VectorXd b);

@@ -29,16 +29,16 @@ double lin_interp(double x, double y, double z, GRID F){
   return c0 * (1 - zdelta) + c1 * zdelta;
 }
 // rk2 to backtrack to the past point
-void rk2(Eigen::Vector &resultant, Velocity v, Eigen::Vector3i point, double dt){
+void rk2(Eigen::Vector3d &resultant, Velocity v, Eigen::Vector3i point, double dt){
   Eigen::Vector3d k1, k2;
   v(k1, point);
-  k1 = (point.cast<double>()+0.5) - dt / 2. * k1;
+  k1 = (point.cast<double>()+0.5 * Eigen::Vector3d::Ones()) - dt / 2. * k1;
   // cast to int, round down to get the right grid
   Eigen::Vector3i point2 = k1.cast<int>();
   v(k2, point2);
   // reverse direction since we are going backwards
   k2 *= -1;
-  resultant = (point.cast<double>() + 0.5) + 0.5 * dt* (k1 + k2);
+  resultant = (point.cast<double>() + 0.5 * Eigen::Vector3d::Ones()) + 0.5 * dt* (k1 + k2);
 }
 void transport(GRID &S1, GRID S0, Velocity v, double dt){
   for(int x = 0 ; x < GX; x++){
@@ -51,9 +51,11 @@ void transport(GRID &S1, GRID S0, Velocity v, double dt){
         rk2(res, v, p, dt);
         // rk2 gets us res, which stores the velocity at back tracked location
         // need to clip the vector 
-        res(0) = std::max(1., std::min(GX, res(0)));
-        res(1) = std::max(1., std::min(GY, res(1)));
-        res(2) = std::max(1., std::min(GZ, res(2)));
+        double resx, resy, resz;
+        resx = res[0];
+        res[0] = std::max(1., std::min((double)GX, resx));
+        res[1] = std::max(1., std::min((double)GY, resy));
+        res[2] = std::max(1., std::min((double)GZ, resz));
         // linearly interpolate it now
         S1[x][y][z] = lin_interp(res(0), res(1), res(2), S0);
       }

@@ -1,3 +1,5 @@
 #include "grid.hpp"
 #include <Eigen/Sparse>
-void assemble_laplacian(Eigen::SparseMatrixXd &A);
+#include "ind.hpp"
+
+void assemble_laplacian(Eigen::SparseMatrixd &A);

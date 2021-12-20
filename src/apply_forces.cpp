@@ -1,13 +1,14 @@
 #include "grid.hpp"
+#include "apply_forces.hpp"
+#include <Eigen/Dense>
 
-void apply_forces(Velocity &v, double dt){
-  // gravity is only force, so just apply gravity to each coordinate in the y component
-  // of the grid
-  for(int x = 0; x < GX; x++){
-    for(int y = 0; y < GY; y++){
-      for(int z = 0; z < GZ; z++){
-        v.u2[x][y][z] += 9.81 * dt;
+void apply_forces(Eigen::VectorXd &S, Eigen::VectorXd F, double dt){
+  for(int k = 0; k < GZ; k++){
+    for(int j = 0; j < GY; j++){
+      for(int i = 0; i < GX; i++){
+        S(IND(i, j, k)) += F(IND(i, j, k)) * dt;
       }
     }
   }
 }
+

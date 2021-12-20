@@ -1,3 +1,3 @@
 #include "grid.hpp"
 
-void apply_forces(Velocity &v, double dt);
+void apply_forces(Eigen::VectorXd &S, Eigen::VectorXd F, double dt);

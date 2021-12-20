@@ -2,4 +2,4 @@
 #include <algorithm>
 #include <Eigen/Dense>
 
-void transport(GRID &S1, GRID S0, Velocity v, double dt);
+void transport(Eigen::VectorXd &S1, Eigen::VectorXd S0, Velocity v, double dt);

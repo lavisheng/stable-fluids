@@ -1,6 +1,6 @@
 #include "transport.hpp"
 // takes in the center
-double lin_interp(double x, double y, double z, GRID F){
+double lin_interp(double x, double y, double z, Eigen::VectorXd F){
   int xlower = (int)(x);
   int ylower = (int)(y);
   int zlower = (int)(z);
@@ -10,14 +10,14 @@ double lin_interp(double x, double y, double z, GRID F){
   double zdelta = (z) - (double)zlower;
 
   // get values at each corner for trilinear interpolation
-  double c000 = F[xlower][ylower][zlower];
-  double c100 = F[xlower + 1][ylower][zlower];
-  double c010 = F[xlower][ylower+1][zlower];
-  double c001 = F[xlower][ylower][zlower+1];
-  double c110 = F[xlower+1][ylower+1][zlower];
-  double c101 = F[xlower+1][ylower][zlower+1];
-  double c011 = F[xlower][ylower+1][zlower+1];
-  double c111 = F[xlower+1][ylower+1][zlower+1];
+  double c000 = F(IND(xlower, ylower, zlower));
+  double c100 = F(IND(xlower + 1, ylower, zlower));
+  double c010 = F(IND(xlower, ylower+1, zlower));
+  double c001 = F(IND(xlower, ylower, zlower+1));
+  double c110 = F(IND(xlower+1, ylower+1, zlower));
+  double c101 = F(IND(xlower+1, ylower, zlower+1));
+  double c011 = F(IND(xlower, ylower+1, zlower+1));
+  double c111 = F(IND(xlower+1, ylower+1, zlower+1));
 
   double c00 = c00 * (1 - xdelta) + c100 * xdelta;
   double c01 = c001 * (1- xdelta) + c101 * xdelta;
@@ -40,24 +40,27 @@ void rk2(Eigen::Vector3d &resultant, Velocity v, Eigen::Vector3i point, double d
   k2 *= -1;
   resultant = (point.cast<double>() + 0.5 * Eigen::Vector3d::Ones()) + 0.5 * dt* (k1 + k2);
 }
-void transport(GRID &S1, GRID S0, Velocity v, double dt){
-  for(int x = 0 ; x < GX; x++){
-    for(int y = 0; y < GY; y++){
-      for(int z = 0; z < GZ; z++){
+void transport(Eigen::VectorXd &S1, Eigen::VectorXd S0, Velocity v, double dt){
+  for(int k = 0 ; k < GZ; k++){
+    for(int j = 0; j < GY; j++){
+      for(int i = 0; i < GX; i++){
         Eigen::Vector3d res;
         Eigen::Vector3i p;
-        p << x, y, z;
+        p << i, j, k;
         // back track
         rk2(res, v, p, dt);
         // rk2 gets us res, which stores the velocity at back tracked location
         // need to clip the vector 
         double resx, resy, resz;
+        // i don't know why this is required to compile the code.
         resx = res[0];
+        resy = res[1];
+        resz = res[2];
         res[0] = std::max(1., std::min((double)GX, resx));
         res[1] = std::max(1., std::min((double)GY, resy));
         res[2] = std::max(1., std::min((double)GZ, resz));
         // linearly interpolate it now
-        S1[x][y][z] = lin_interp(res(0), res(1), res(2), S0);
+        S1(IND(i, j, k)) = lin_interp(res(0), res(1), res(2), S0);
       }
     }
   }

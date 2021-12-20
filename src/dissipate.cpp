@@ -1,10 +1,10 @@
 #include "dissipate.hpp"
 // a is dissipation rate
-void dissipate(GRID &S1, GRID S0, double a, double dt ){
-  for(int x = 0; x < GX; x++){
-    for(int y = 0; y < GY; y++){
-      for(int z = 0; z < GZ; z++){
-        S1[x][y][z] = S0[x][y][z] / (1 + dt * a);
+void dissipate(Eigen::VectorXd &S1, Eigen::VectorXd S0, double a, double dt ){
+  for(int k = 0; k < GZ; k++){
+    for(int j = 0; j < GY; j++){
+      for(int i = 0; i < GX; i++){
+        S1(IND(i, j, k)) = S0(IND(i,j,k)) / (1. + dt * a);
       }
     }
   }

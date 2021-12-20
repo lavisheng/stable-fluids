@@ -1,4 +1,4 @@
-#include "conjugate_gradient.hpp"
+#include "conjugate_gradient.h"
 
 // implementation of pseudocode on wikipedia
 void conjugate_gradient(Eigen::VectorXd &x, Eigen::SparseMatrixd A, Eigen::VectorXd b){

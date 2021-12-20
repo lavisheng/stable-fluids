@@ -1,6 +1,5 @@
-#include "grid.hpp"
+#include "grid.h"
 #include <Eigen/Sparse>
-#include "ind.hpp"
 
 // admittedly i do not actually know if this is the laplacian
 // it might be the diffusion op instead lol

@@ -1,4 +1,4 @@
-#include "project.hpp"
+#include "project.h"
 
 void project(Velocity &v1, Velocity v0,  Eigen::SparseMatrixd A){
   // calculate a div, negate it

@@ -1,4 +1,4 @@
-#include "dissipate.hpp"
+#include "dissipate.h"
 // a is dissipation rate
 void dissipate(Eigen::VectorXd &S1, Eigen::VectorXd S0, double a, double dt ){
   for(int k = 0; k < GZ; k++){

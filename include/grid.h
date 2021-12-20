@@ -1,6 +1,5 @@
 #ifndef GRID_
 #define GRID_
-#include <array>
 #include <EigenTypes.h>
 #include <Eigen/Dense>
 #define GX 1

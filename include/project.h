@@ -1,5 +1,4 @@
-#include "grid.hpp"
+#include "grid.h"
 #include <Eigen/Sparse>
-#include "ind.hpp"
-#include "conjugate_gradient.hpp"
+#include "conjugate_gradient.h"
 void project(Velocity &v1, Velocity v0, Eigen::SparseMatrixd A);

@@ -1,5 +1,4 @@
-#include "grid.hpp"
-#include "apply_forces.hpp"
+#include "apply_forces.h"
 #include <Eigen/Dense>
 
 void apply_forces(Eigen::VectorXd &S, Eigen::VectorXd F, double dt){

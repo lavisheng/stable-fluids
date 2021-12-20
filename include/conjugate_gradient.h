@@ -1,4 +1,4 @@
-#include "grid.hpp"
+#include "grid.h"
 #include <Eigen/Sparse>
 #include <Eigen/Dense>
 

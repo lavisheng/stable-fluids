@@ -1,9 +1,6 @@
-#include "grid.hpp"
-#include <Eigen/Dense>
-#include <EigenTypes.h>
-//#include <Eigen
+#include "project.hpp"
 
-void project(Velocity &v1, Velocity v0, Pressure p, Eigen::SparseMatrixXd A){
+void project(Velocity &v1, Velocity v0,  Eigen::SparseMatrixXd A){
   // calculate a div, negate it
   GRID neg_div;
   // stores a negated div

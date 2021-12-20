@@ -1,5 +1,3 @@
-#include <Eigen/Sparse>
-#include <Eigen/Dense>
 #include <vector>
 #include "grid.hpp"
 // helper 

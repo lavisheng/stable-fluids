@@ -1,4 +1,4 @@
-#include <Eigen/Dense>
+#include "vec2grid.hpp"
 
 void vec2grid(GRID &g, Eigen::VectorXd vec){
   for(int k = 0; k < GZ; k++){

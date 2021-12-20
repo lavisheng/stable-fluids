@@ -1,5 +1,4 @@
-#include <Eigen/Dense>
-
+#include "grid2vec.hpp"
 void grid2vec(Eigen::VectorXd &vec, GRID g){
   vec.resize(GX*GY*GZ);
   for(int i = 0; i < GX; i++){

@@ -1,4 +1,4 @@
-#include "grid.hpp"
+#include "dissipate.hpp"
 // a is dissipation rate
 void dissipate(GRID &S1, GRID S0, double a, double dt ){
   for(int x = 0; x < GX; x++){

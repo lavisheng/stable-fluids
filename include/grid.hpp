@@ -1,5 +1,5 @@
 #include <array>
-#include <Eigen/Types.h>
+#include <EigenTypes.h>
 #include <Eigen/Dense>
 #define GX 1
 #define GY 1

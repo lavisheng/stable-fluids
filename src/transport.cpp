@@ -1,7 +1,4 @@
-#include<Eigen/Types.h>
-#include <Eigen/Dense>
-#include <algorithm>
-#include "grid.hpp"
+#include "transport.hpp"
 // takes in the center
 double lin_interp(double x, double y, double z, GRID F){
   int xlower = (int)(x);

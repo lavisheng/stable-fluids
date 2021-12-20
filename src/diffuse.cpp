@@ -1,5 +1,4 @@
-#include "grid.hpp"
-#include <Eigen/Sparse>
+#include "diffuse.hpp"
 #include <vector>
 #define TRIPLET
 void diffuse(GRID &S1, GRID S0, double visc, double dt){

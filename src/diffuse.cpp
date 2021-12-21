@@ -11,11 +11,7 @@ void diffuse(Eigen::VectorXd &S1, Eigen::VectorXd S0, double visc, double dt, Ei
   }
   I.setFromTriplets(triplets.begin(), triplets.end());
   // setup variables to solve (I - visc * dt * A) w3 = w2
-  //Eigen::VectorXd x;
-  //Eigen::VectorXd b;
-  //grid2vec(b, S0);
   Eigen::SparseMatrixd mat = I - visc * dt * A;
   conjugate_gradient(S1, mat, S0);
 
-  //vec2grid(S1, x);
 }

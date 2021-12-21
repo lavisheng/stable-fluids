@@ -2,13 +2,13 @@
 #define GRID_
 #include <EigenTypes.h>
 #include <Eigen/Dense>
-#define GX 1
-#define GY 1
-#define GZ 1
+#define GX 10.
+#define GY 10.
+#define GZ 10.
+#define GRIDSIZE (GX * GY * GZ)
 #define dx 1
 #define dy 1
 #define dz 1
-#define GRID std::array<std::array<std::array<double, GZ>, GY>, GX>
 #define IND(i,j,k) (i + j * GX + k * GX * GY)
 typedef struct Velocity_{
   // 3 grids for each component

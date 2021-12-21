@@ -55,7 +55,7 @@ void drawVoxels(){
         // we control it via alpha
         // red fluids only
         // this is the density value
-        sval = (float)S1(IND(i, j, k))(0);
+        sval = (float)S1(IND(i, j, k));
         // get alpha
         // need to make sure that the empty black cubes up front aren't blocking view of back
         alpha = std::min(BASEALPHA, BASEALPHA * sval);

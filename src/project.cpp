@@ -3,7 +3,7 @@
 void project(Velocity &v1, Velocity v0,  Eigen::SparseMatrixd A){
   // calculate a div, negate it
   // stores a negated div
-  Eigen::VectorXd div(GX * GY * GZ);
+  Eigen::VectorXd div((int)GRIDSIZE);
   
   for(int k = 1; k < GZ; k++){
     for(int j = 1; j < GY; j++){

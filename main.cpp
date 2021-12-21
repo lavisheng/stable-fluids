@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include "grid.h"
+#include "lin_interp.h"
 #include "apply_forces.h"
 #include "assemble_laplacian.h"
 #include "diffuse.h"
@@ -66,7 +67,7 @@ void drawVoxels(){
         // get alpha
         // need to make sure that the empty black cubes up front aren't blocking view of back
         // only show if 
-        alpha = std::min(BASEALPHA, BASEALPHA * sval * 100);
+        alpha = std::min(BASEALPHA, BASEALPHA * sval * sval * 100);
         glColor4f(1.0f * sval * 20, 0, 0, alpha); 
         glutSolidCube(1.0);
 

@@ -1,4 +1,5 @@
 #include "grid.h"
+#include "lin_interp.h"
 #include <algorithm>
 #include <Eigen/Dense>
 

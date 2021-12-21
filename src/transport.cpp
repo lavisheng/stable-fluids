@@ -1,5 +1,5 @@
 #include "transport.h"
-// takes in the center
+// linear interpolation at a point in a grid
 double lin_interp(double x, double y, double z, Eigen::VectorXd F){
   int xlower = (int)(x);
   int ylower = (int)(y);
@@ -29,6 +29,7 @@ double lin_interp(double x, double y, double z, Eigen::VectorXd F){
   return c0 * (1 - zdelta) + c1 * zdelta;
 }
 // rk2 to backtrack to the past point
+// NOTE: yes, this is hillariously wrong. The correct rk2 implementation messes with conjugate_gradient setup and explodes into NaNs
 void rk2(Eigen::Vector3d &resultant, Velocity v, Eigen::Vector3i point, double dt){
   Eigen::Vector3d k1, k2;
   v(k1, point);
@@ -50,8 +51,7 @@ void transport(Eigen::VectorXd &S1, Eigen::VectorXd S0, Velocity v, double dt){
         // back track
         rk2(res, v, p, dt);
         // rk2 gets us res, which stores the velocity at back tracked location
-        // need to clip the vector 
-        double resx, resy, resz;
+        // need to clip the vector to ensure bounds
         res[0] = std::max(1., std::min((double)GX-2, res[0]));
         res[1] = std::max(1., std::min((double)GY -2, res[1]));
         res[2] = std::max(1., std::min((double)GZ -2, res[2]));

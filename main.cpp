@@ -100,7 +100,7 @@ void simulation(){
 
   // scalar sim
   apply_forces(S0, source, DT);
-  transport(S1, S0, v1, DT);
+  transport(S1, S0, v0, DT);
   diffuse(S0, S1, 0.001, DT, A);
   dissipate(S1, S0, 0.01, DT);
   // swap buffers

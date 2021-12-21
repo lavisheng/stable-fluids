@@ -5,9 +5,9 @@ double lin_interp(double x, double y, double z, Eigen::VectorXd F){
   int ylower = (int)(y);
   int zlower = (int)(z);
 
-  double xdelta = (x) - (double)xlower;
-  double ydelta = (y) - (double)ylower;
-  double zdelta = (z) - (double)zlower;
+  double xdelta = x - (double)xlower;
+  double ydelta = y - (double)ylower;
+  double zdelta = z - (double)zlower;
 
   // get values at each corner for trilinear interpolation
   double c000 = F(IND(xlower, ylower, zlower));
@@ -52,9 +52,9 @@ void transport(Eigen::VectorXd &S1, Eigen::VectorXd S0, Velocity v, double dt){
         // rk2 gets us res, which stores the velocity at back tracked location
         // need to clip the vector 
         double resx, resy, resz;
-        res[0] = std::max(1., std::min((double)GX, res[0]));
-        res[1] = std::max(1., std::min((double)GY, res[1]));
-        res[2] = std::max(1., std::min((double)GZ, res[2]));
+        res[0] = std::max(1., std::min((double)GX-2, res[0]));
+        res[1] = std::max(1., std::min((double)GY -2, res[1]));
+        res[2] = std::max(1., std::min((double)GZ -2, res[2]));
         // linearly interpolate it now
         S1(IND(i, j, k)) = lin_interp(res(0), res(1), res(2), S0);
       }

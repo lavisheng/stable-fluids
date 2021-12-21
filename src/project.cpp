@@ -5,9 +5,9 @@ void project(Velocity &v1, Velocity v0,  Eigen::SparseMatrixd A){
   // stores a negated div
   Eigen::VectorXd div((int)GRIDSIZE);
   
-  for(int k = 1; k < GZ; k++){
-    for(int j = 1; j < GY; j++){
-      for(int i = 1; i < GX; i++){
+  for(int k = 1; k < GZ-1; k++){
+    for(int j = 1; j < GY-1; j++){
+      for(int i = 1; i < GX-1; i++){
         div(IND(i, j, k)) = -(v0.u1(IND(i+1, j ,k)) - v0.u1(IND(i-1, j ,k)) +
                               v0.u2(IND(i, j+1, k)) - v0.u2(IND(i, j-1, k)) +
                               v0.u3(IND(i, j, k+1)) - v0.u3(IND(i, j, k-1))) / 2.;
@@ -32,9 +32,9 @@ void project(Velocity &v1, Velocity v0,  Eigen::SparseMatrixd A){
   conjugate_gradient(x, A, div);
   // solved a relaxation for q
   // now subtract the difference
-  for(int i = 1; i < GX; i++){
-    for(int j = 1; j < GY; j++){
-      for(int k = 1; k < GZ; k++){
+  for(int i = 1; i < GX-1; i++){
+    for(int j = 1; j < GY-1; j++){
+      for(int k = 1; k < GZ-1; k++){
         v1.u1(IND(i, j, k)) = v0.u1(IND(i, j ,k)) -
           0.5 * (x(IND(i+1, j, k)) - x(IND(i-1, j ,k)));
         v1.u2(IND(i, j, k)) = v1.u2(IND(i, j, k)) -
@@ -44,4 +44,7 @@ void project(Velocity &v1, Velocity v0,  Eigen::SparseMatrixd A){
       }
     }
   }
+  bound(v1.u1, xDim);
+  bound(v1.u2, yDim);
+  bound(v1.u3, zDim);
 }

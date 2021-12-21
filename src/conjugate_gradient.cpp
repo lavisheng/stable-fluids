@@ -13,7 +13,7 @@ void conjugate_gradient(Eigen::VectorXd &x, Eigen::SparseMatrixd A, Eigen::Vecto
     Eigen::VectorXd rprime = r -  alpha * A * p;
     if(rprime.norm() < 1e-10) break;
     double beta = (rprime.transpose() * rprime)(0)/ (r.transpose() * r)(0);
-    p = rprime * beta * p;
+    p = rprime + beta * p;
     r = rprime;
   }
 }

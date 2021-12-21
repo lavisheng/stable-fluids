@@ -3,4 +3,4 @@
 #include <EigenTypes.h>
 enum Dir { xDim, yDim, zDim};
 
-void bound(Eigen::VectorXd field, Dir dir);
+void bound(Eigen::VectorXd &field, Dir dir);

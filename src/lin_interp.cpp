@@ -19,7 +19,7 @@ double lin_interp(double x, double y, double z, Eigen::VectorXd F){
   double c011 = F(IND(xlower, ylower+1, zlower+1));
   double c111 = F(IND(xlower+1, ylower+1, zlower+1));
 
-  double c00 = c00 * (1 - xdelta) + c100 * xdelta;
+  double c00 = c000 * (1 - xdelta) + c100 * xdelta;
   double c01 = c001 * (1- xdelta) + c101 * xdelta;
   double c10 = c010 * (1 - xdelta) + c110 * xdelta;
   double c11 = c011 * (1-xdelta) + c111 * xdelta;

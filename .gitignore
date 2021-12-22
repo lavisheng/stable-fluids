@@ -3,3 +3,4 @@ build/*
 /build
 /extern/*
 extern/*
+!extern/.gitkeep
